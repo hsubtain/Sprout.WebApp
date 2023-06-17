@@ -23,3 +23,16 @@ C:\Users\hsubtain\Downloads\TechExam\Sprout.Exam.WebApp\Sprout.Exam.Business\obj
 C:\Users\hsubtain\Downloads\TechExam\Sprout.Exam.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.CopyComplete
 C:\Users\hsubtain\Downloads\TechExam\Sprout.Exam.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.dll
 C:\Users\hsubtain\Downloads\TechExam\Sprout.Exam.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.pdb
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Business.deps.json
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Business.dll
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Business.pdb
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.dll
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\bin\Debug\netcoreapp3.1\Sprout.Exam.Common.pdb
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.AssemblyReference.cache
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.AssemblyInfoInputs.cache
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.AssemblyInfo.cs
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.CoreCompileInputs.cache
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.csproj.CopyComplete
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.dll
+C:\Users\hsubtain\Downloads\TechExam\Sprout.WebApp\Sprout.Exam.Business\obj\Debug\netcoreapp3.1\Sprout.Exam.Business.pdb

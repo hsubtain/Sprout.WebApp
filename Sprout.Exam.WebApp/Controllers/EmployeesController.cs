@@ -9,6 +9,7 @@ using Sprout.Exam.Business.DataTransferObjects;
 using Sprout.Exam.Common.Enums;
 using Sprout.Exam.WebApp.Models;
 using Sprout.Exam.WebApp.Data;
+using System.Net.Http;
 
 namespace Sprout.Exam.WebApp.Controllers
 {
@@ -17,6 +18,7 @@ namespace Sprout.Exam.WebApp.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
+        //Instantiate dbContect in Employees Controller
         private readonly ApplicationDbContext _dbContext;
 
         public EmployeesController(ApplicationDbContext dbContext)
@@ -31,6 +33,7 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpGet]
         public IEnumerable<EmployeeDto> Get()
         {
+            //return a list of existing employees from MSSQL
             var result = _dbContext.Employees;
             return result;
         }
@@ -42,6 +45,7 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpGet("{id}")]
         public EmployeeDto GetById(int id)
         {
+            //Grab the employee details by ID then return
             var employeeByIdResult = _dbContext.Employees.FirstOrDefault(employee => employee.Id == id);
             return employeeByIdResult;
         }
@@ -53,23 +57,17 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(EditEmployeeDto input)
         {
-            var findResult =_dbContext.Employees.Find(input.Id);
-            findResult.FullName = input.FullName;
-            findResult.Birthdate = input.Birthdate;
-            findResult.Tin = input.Tin;
-            findResult.TypeId = input.TypeId;
+            //Find the employee using ID, then update it's data
+            var employeeUpdateData = _dbContext.Employees.Find(input.Id);
+            if (employeeUpdateData == null) return NotFound();
+            employeeUpdateData.FullName = input.FullName;
+            employeeUpdateData.Birthdate = input.Birthdate;
+            employeeUpdateData.Tin = input.Tin;
+            employeeUpdateData.TypeId = input.TypeId;
+            //Save changes then return updated employee object
             _dbContext.SaveChanges();
-            return Ok(findResult);
+            return Ok(employeeUpdateData);
         }
-
-        //[HttpPut("{id}")]
-        //public IActionResult PutSecond([FromBody] employee)
-        //{
-        //    var retMessage = "Successfully Created Employee";
-        //    /PERFORM UPDATE/
-        //    return Ok(retMessage);
-        //}
-
 
         /// <summary>
         /// Refactor this method to go through proper layers and insert employees to the DB.
@@ -78,22 +76,13 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(EmployeeDto input)
         {
-
+            //Add employee
             _dbContext.Employees.Add(input);
             _dbContext.SaveChanges();
             int lastID = _dbContext.Employees.Max(employee => employee.Id);
 
             return Created($"/api/employees/{lastID}", lastID);
         }
-
-        //[HttpPost]
-        //public IActionResult PostSecond(EmployeeDto employee)
-        //{
-        //    var retMessage = "Successfully Created Employee";
-        //    employees.Add(employee);
-        //    return Ok(retMessage);
-        //}
-
 
         /// <summary>
         /// Refactor this method to go through proper layers and perform soft deletion of an employee to the DB.
@@ -102,21 +91,14 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await Task.FromResult(StaticEmployees.ResultList.FirstOrDefault(m => m.Id == id));
-            if (result == null) return NotFound();
-            StaticEmployees.ResultList.RemoveAll(m => m.Id == id);
+            //Find the employee using ID, then update IsDeleted property
+            var employeeDeleteData = _dbContext.Employees.Find(id);
+            if (employeeDeleteData == null) return NotFound();
+            employeeDeleteData.IsDeleted = 1;
+            //Save changes
+            _dbContext.SaveChanges();
             return Ok(id);
         }
-
-        //[HttpDelete("{id}")]
-        //public IActionResult DeleteSecond(int id)
-        //{
-        //    var retMessage = "Successfully Created Employee";
-        //    /PERFORM DELETE/
-        //    employees.RemoveAt(id);
-        //    return Ok(retMessage);
-        //}
-
 
         /// <summary>
         /// Refactor this method to go through proper layers and use Factory pattern
@@ -126,24 +108,43 @@ namespace Sprout.Exam.WebApp.Controllers
         /// <param name="workedDays"></param>
         /// <returns></returns>
         [HttpPost("{id}/calculate")]
-        public async Task<IActionResult> Calculate(int id,decimal absentDays,decimal workedDays)
+        public async Task<IActionResult> Calculate([FromBody] CalculateClass calculateObj)
         {
-            var result = await Task.FromResult(StaticEmployees.ResultList.FirstOrDefault(m => m.Id == id));
-
-            if (result == null) return NotFound();
-            var type = (EmployeeType) result.TypeId;
-            return type switch
+            try
             {
-                EmployeeType.Regular =>
-                    //create computation for regular.
-                    Ok(25000),
-                EmployeeType.Contractual =>
-                    //create computation for contractual.
-                    Ok(20000),
-                _ => NotFound("Employee Type not found")
-            };
-
+                var employeeData = _dbContext.Employees.Find(calculateObj.id);
+                if (employeeData == null) return NotFound();
+                var type = (EmployeeType)employeeData.TypeId;
+                var totalSalary = calCulateRegularEmployeeSalary(calculateObj.absentDays, calculateObj.workedDays, type);
+                return Ok(totalSalary);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
+        private decimal calCulateRegularEmployeeSalary(decimal AbsentDays, decimal workedDays, EmployeeType empType)
+        {
+            decimal totalSalary = 0;
+            switch (empType)
+            {
+                case EmployeeType.Regular:
+                    var daysInMonth = 21;
+                    var salary = 20000;
+                    var tax = 12;
+                    totalSalary = salary - (salary / (daysInMonth + AbsentDays));
+                    totalSalary = totalSalary - ((totalSalary * tax) / 100);
+                    break;
+                case EmployeeType.Contractual:
+                    var salaryPerDay = 500;
+                    totalSalary = salaryPerDay * workedDays;
+                    break;
+                default:
+                    //Add a retrun for default
+                    break;
+            }
+            return Math.Round(totalSalary, 2);
+        }
     }
 }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.Exam.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj": {}
+    "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.Exam.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj": {
+    "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.Exam.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj",
+        "projectUniqueName": "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj",
         "projectName": "Sprout.Exam.Common",
-        "projectPath": "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.Exam.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj",
+        "projectPath": "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.WebApp\\Sprout.Exam.Common\\Sprout.Exam.Common.csproj",
         "packagesPath": "C:\\Users\\hsubtain\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.Exam.WebApp\\Sprout.Exam.Common\\obj\\",
+        "outputPath": "C:\\Users\\hsubtain\\Downloads\\TechExam\\Sprout.WebApp\\Sprout.Exam.Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
