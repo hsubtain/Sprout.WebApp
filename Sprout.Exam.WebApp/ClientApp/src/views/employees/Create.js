@@ -41,8 +41,8 @@ export class EmployeeCreate extends Component {
 </div>
 <div className="form-row">
 <div className='form-group col-md-6'>
-  <label htmlFor='inputTin4'>TIN: *</label>
-  <input type='text' className='form-control' maxLength='15' id='inputTin4' onChange={this.handleChange.bind(this)} value={this.state.tin} name="tin" placeholder='TIN' required/>
+                        <label htmlFor='inputTin4'>TIN: *</label>
+                        <input type='number' className='form-control' maxLength='15' id='inputTin4' onChange={this.handleChange.bind(this)} value={this.state.tin} name="tin" placeholder='TIN' required />
 </div>
 <div className='form-group col-md-6'>
                         <label htmlFor='inputEmployeeType4'>Employee Type: *</label>

@@ -65,11 +65,11 @@ export class EmployeeCalculate extends Component {
                         {this.state.typeId === 1 ?
                             <div className='form-group col-md-6'>
                                 <label htmlFor='inputAbsentDays4'>Absent Days: </label>
-                                <input type='text' maxLength='2' className='form-control' id='inputAbsentDays4' onChange={this.handleChange.bind(this)} value={this.state.absentDays} name="absentDays" placeholder='Absent Days' required />
+                                <input type='number' maxLength='2' className='form-control' id='inputAbsentDays4' onChange={this.handleChange.bind(this)} value={this.state.absentDays} name="absentDays" placeholder='Absent Days' required />
                             </div> :
                             <div className='form-group col-md-6'>
                                 <label htmlFor='inputWorkDays4'>Worked Days: </label>
-                                <input type='text' maxLength="2" className='form-control' id='inputWorkDays4' onChange={this.handleChange.bind(this)} value={this.state.workedDays} name="workedDays" placeholder='Worked Days' required />
+                                <input type='number' maxLength="2" className='form-control' id='inputWorkDays4' onChange={this.handleChange.bind(this)} value={this.state.workedDays} name="workedDays" placeholder='Worked Days' required />
                             </div>
                         }
                     </div>
