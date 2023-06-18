@@ -13,7 +13,23 @@ export class EmployeeCalculate extends Component {
         this.getEmployee(this.props.match.params.id);
     }
     handleChange(event) {
-        this.setState({ [event.target.name]: event.target.value });
+        let fieldName = event.target.name,
+            fieldValue = event.target.value,
+            regex = '/[a-zA-Z]/';
+
+        if (fieldValue !== null) {
+            switch (fieldName) {
+                case "absentDays":
+                    if (fieldValue > 21) return alert('Absent days can not be greater than 21');
+                    break;
+                case "workedDays":
+                    if (fieldValue > 31) return alert('Worked days can not be greater than 31');
+                    break;
+                default:
+                    break
+            }
+        }
+        this.setState({ [fieldName]: fieldValue });
     }
 
     handleSubmit(e) {

@@ -18,6 +18,8 @@ export class EmployeeCreate extends Component {
 
   handleSubmit(e){
       e.preventDefault();
+      //All the fields should be populated, notify user if a field is empty
+      if (!this.state.birthdate || !this.state.fullName || !this.state.tin) return alert('Please populate all fields.');
       if (window.confirm("Are you sure you want to save?")) {
         this.saveEmployee();
       } 

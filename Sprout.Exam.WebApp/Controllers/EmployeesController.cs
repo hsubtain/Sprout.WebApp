@@ -181,7 +181,7 @@ namespace Sprout.Exam.WebApp.Controllers
                     var daysInMonth = 21;
                     var salary = 20000;
                     var tax = 12;
-                    totalSalary = salary - (salary / (daysInMonth + AbsentDays));
+                    totalSalary = salary - ((salary / daysInMonth) * AbsentDays);
                     totalSalary = totalSalary - ((totalSalary * tax) / 100);
                     break;
                 case EmployeeType.Contractual:
