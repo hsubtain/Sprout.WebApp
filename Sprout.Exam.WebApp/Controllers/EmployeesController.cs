@@ -33,9 +33,17 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            //return a list of existing employees from MSSQL
-            var result = _dbContext.Employees;
-            return Ok(result);
+            try
+            {
+                //return a list of existing employees from MSSQL
+                var result = _dbContext.Employees;
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         /// <summary>
@@ -45,10 +53,18 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            //Grab the employee details by ID then return result
-            var employeeByIdResult = _dbContext.Employees.FirstOrDefault(employee => employee.Id == id);
-            if (employeeByIdResult == null) return NotFound();
-            return Ok(employeeByIdResult);
+            try
+            {
+                //Grab the employee details by ID then return result
+                var employeeByIdResult = _dbContext.Employees.FirstOrDefault(employee => employee.Id == id);
+                if (employeeByIdResult == null) return NotFound();
+                return Ok(employeeByIdResult);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         /// <summary>
@@ -58,16 +74,24 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(EditEmployeeDto input)
         {
-            //Find the employee using ID, then update it's data
-            var employeeUpdateData = _dbContext.Employees.Find(input.Id);
-            if (employeeUpdateData == null) return NotFound();
-            employeeUpdateData.FullName = input.FullName;
-            employeeUpdateData.Birthdate = input.Birthdate;
-            employeeUpdateData.Tin = input.Tin;
-            employeeUpdateData.TypeId = input.TypeId;
-            //Save changes then return updated employee object
-            _dbContext.SaveChanges();
-            return Ok(employeeUpdateData);
+            try
+            {
+                //Find the employee using ID, then update it's data
+                var employeeUpdateData = _dbContext.Employees.Find(input.Id);
+                if (employeeUpdateData == null) return NotFound();
+                employeeUpdateData.FullName = input.FullName;
+                employeeUpdateData.Birthdate = input.Birthdate;
+                employeeUpdateData.Tin = input.Tin;
+                employeeUpdateData.TypeId = input.TypeId;
+                //Save changes then return updated employee object
+                _dbContext.SaveChanges();
+                return Ok(employeeUpdateData);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         /// <summary>
@@ -78,14 +102,22 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(EmployeeDto input)
         {
-            //Add employee then save chanes
-            _dbContext.Employees.Add(input);
-            _dbContext.SaveChanges();
+            try
+            {
+                //Add employee then save chanes
+                _dbContext.Employees.Add(input);
+                _dbContext.SaveChanges();
 
-            //grab the ID of the last added employee then return it
-            int lastID = _dbContext.Employees.Max(employee => employee.Id);
+                //grab the ID of the last added employee then return it
+                int lastID = _dbContext.Employees.Max(employee => employee.Id);
 
-            return Created($"/api/employees/{lastID}", lastID);
+                return Created($"/api/employees/{lastID}", lastID);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+            
         }
 
         /// <summary>
@@ -96,13 +128,20 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            //Find the employee using ID, then update IsDeleted property
-            var employeeDeleteData = _dbContext.Employees.Find(id);
-            if (employeeDeleteData == null) return NotFound();
-            employeeDeleteData.IsDeleted = 1;
-            //Save changes
-            _dbContext.SaveChanges();
-            return Ok(id);
+            try
+            {
+                //Find the employee using ID, then update IsDeleted property
+                var employeeDeleteData = _dbContext.Employees.Find(id);
+                if (employeeDeleteData == null) return NotFound();
+                employeeDeleteData.IsDeleted = 1;
+                //Save changes
+                _dbContext.SaveChanges();
+                return Ok(id);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
         }
 
         /// <summary>
