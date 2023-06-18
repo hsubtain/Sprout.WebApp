@@ -31,22 +31,22 @@ export class EmployeeCreate extends Component {
     <form>
 <div className='form-row'>
 <div className='form-group col-md-6'>
-  <label htmlFor='inputFullName4'>Full Name: *</label>
-  <input type='text' className='form-control' id='inputFullName4' onChange={this.handleChange.bind(this)} name="fullName" value={this.state.fullName} placeholder='Full Name' />
+                        <label htmlFor='inputFullName4'>Full Name: *</label>
+                        <input type='text' className='form-control' req maxLength='60' id='inputFullName4' onChange={this.handleChange.bind(this)} name="fullName" value={this.state.fullName} placeholder='Full Name' required />
 </div>
 <div className='form-group col-md-6'>
-  <label htmlFor='inputBirthdate4'>Birthdate: *</label>
-  <input type='date' className='form-control' id='inputBirthdate4' onChange={this.handleChange.bind(this)} name="birthdate" value={this.state.birthdate} placeholder='Birthdate' />
+                        <label htmlFor='inputBirthdate4'>Birthdate: *</label>
+                        <input type='date' className='form-control' id='inputBirthdate4' onChange={this.handleChange.bind(this)} name="birthdate" value={this.state.birthdate} placeholder='Birthdate' required />
 </div>
 </div>
 <div className="form-row">
 <div className='form-group col-md-6'>
   <label htmlFor='inputTin4'>TIN: *</label>
-  <input type='text' className='form-control' id='inputTin4' onChange={this.handleChange.bind(this)} value={this.state.tin} name="tin" placeholder='TIN' />
+  <input type='text' className='form-control' maxLength='15' id='inputTin4' onChange={this.handleChange.bind(this)} value={this.state.tin} name="tin" placeholder='TIN' required/>
 </div>
 <div className='form-group col-md-6'>
-  <label htmlFor='inputEmployeeType4'>Employee Type: *</label>
-  <select id='inputEmployeeType4' onChange={this.handleChange.bind(this)} value={this.state.typeId}  name="typeId" className='form-control'>
+                        <label htmlFor='inputEmployeeType4'>Employee Type: *</label>
+                        <select id='inputEmployeeType4' onChange={this.handleChange.bind(this)} value={this.state.typeId} name="typeId" className='form-control' required>
     <option value='1'>Regular</option>
     <option value='2'>Contractual</option>
   </select>

@@ -31,11 +31,11 @@ namespace Sprout.Exam.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<EmployeeDto> Get()
+        public IActionResult Get()
         {
             //return a list of existing employees from MSSQL
             var result = _dbContext.Employees;
-            return result;
+            return Ok(result);
         }
 
         /// <summary>
@@ -43,11 +43,12 @@ namespace Sprout.Exam.WebApp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
-        public EmployeeDto GetById(int id)
+        public IActionResult GetById(int id)
         {
-            //Grab the employee details by ID then return
+            //Grab the employee details by ID then return result
             var employeeByIdResult = _dbContext.Employees.FirstOrDefault(employee => employee.Id == id);
-            return employeeByIdResult;
+            if (employeeByIdResult == null) return NotFound();
+            return Ok(employeeByIdResult);
         }
 
         /// <summary>
@@ -76,9 +77,11 @@ namespace Sprout.Exam.WebApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(EmployeeDto input)
         {
-            //Add employee
+            //Add employee then save chanes
             _dbContext.Employees.Add(input);
             _dbContext.SaveChanges();
+
+            //grab the ID of the last added employee then return it
             int lastID = _dbContext.Employees.Max(employee => employee.Id);
 
             return Created($"/api/employees/{lastID}", lastID);
@@ -103,9 +106,7 @@ namespace Sprout.Exam.WebApp.Controllers
         /// <summary>
         /// Refactor this method to go through proper layers and use Factory pattern
         /// </summary>
-        /// <param name="id"></param>
-        /// <param name="absentDays"></param>
-        /// <param name="workedDays"></param>
+        /// <param CalculateClass></param>
         /// <returns></returns>
         [HttpPost("{id}/calculate")]
         public async Task<IActionResult> Calculate([FromBody] CalculateClass calculateObj)
