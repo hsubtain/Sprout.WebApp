@@ -27,7 +27,7 @@ namespace Sprout.Exam.WebApp.Controllers
         }
 
         /// <summary>
-        /// Refactor this method to go through proper layers and fetch from the DB.
+        /// Retrieve all active employees from the database
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -39,7 +39,7 @@ namespace Sprout.Exam.WebApp.Controllers
         }
 
         /// <summary>
-        /// Refactor this method to go through proper layers and fetch from the DB.
+        /// Retrieve a specific employee using the employee's ID
         /// </summary>
         /// <returns></returns>
         [HttpGet("{id}")]
@@ -52,9 +52,9 @@ namespace Sprout.Exam.WebApp.Controllers
         }
 
         /// <summary>
-        /// Refactor this method to go through proper layers and update changes to the DB.
+        /// Update an employee information using 
         /// </summary>
-        /// <returns></returns>
+        /// <returns><c>EmployeeDto<c></returns>
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(EditEmployeeDto input)
         {
@@ -71,9 +71,10 @@ namespace Sprout.Exam.WebApp.Controllers
         }
 
         /// <summary>
-        /// Refactor this method to go through proper layers and insert employees to the DB.
+        /// Add new employee to the database
+        /// Return the ID of the new employee
         /// </summary>
-        /// <returns></returns>
+        /// <returns><c>EmployeeDto.Id.<c></returns>
         [HttpPost]
         public async Task<IActionResult> Post(EmployeeDto input)
         {
@@ -88,7 +89,8 @@ namespace Sprout.Exam.WebApp.Controllers
         }
 
         /// <summary>
-        /// Refactor this method to go through proper layers and perform soft deletion of an employee to the DB.
+        /// Delete an employee from the database
+        /// This will perform a soft delete, ths isDeleted property will be modified
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{id}")]
@@ -104,10 +106,10 @@ namespace Sprout.Exam.WebApp.Controllers
         }
 
         /// <summary>
-        /// Refactor this method to go through proper layers and use Factory pattern
+        /// Perform a calculation for the employee's salary based on it's type
         /// </summary>
-        /// <param CalculateClass></param>
-        /// <returns></returns>
+        /// <param><c>CalculateClass</c>c></param>
+        /// <returns><c>Total Salary</c>c></returns>
         [HttpPost("{id}/calculate")]
         public async Task<IActionResult> Calculate([FromBody] CalculateClass calculateObj)
         {
@@ -125,6 +127,12 @@ namespace Sprout.Exam.WebApp.Controllers
             }
         }
 
+        /// <summary>
+        /// Function for performing the calculation on the employee's salary
+        /// We can handle future employee type by adding to the EmployeeType enum class
+        /// Add switch case for the newly added employee type
+        ///<returns><c>Total Salary computed</c>c></returns>
+        /// </summary>
         private decimal calCulateRegularEmployeeSalary(decimal AbsentDays, decimal workedDays, EmployeeType empType)
         {
             decimal totalSalary = 0;
